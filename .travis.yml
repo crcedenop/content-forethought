@@ -7,13 +7,12 @@ services:
 before_install:
 - openssl aes-256-cbc -K $encrypted_b295e0f06079_key -iv $encrypted_b295e0f06079_iv
   -in gaekey.json.enc -out gaekey.json -d
-docker build -t forethought .
-docker run -d -p 8080:8080 forethought
-docker ps -a
-
+- docker build -t forethought .
+- docker run -d -p 8080:8080 forethought
+- docker ps -a
 deploy:
   provider: gae
   keyfile: gaekey.json
-  project: deploying-to-257-7de18525 
+  project: deploying-to-257-6ccfff2d 
   on:
     branch: main
