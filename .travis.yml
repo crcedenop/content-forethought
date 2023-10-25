@@ -1,12 +1,17 @@
-#Comment
 dist: focal
 language: node_js
 node_js:
-  - "lts/*"
-  - node
+- lts/*
+- node
 services:
-  - docker
+- docker
 before_install:
-  - docker build -t forethought .
-  - docker run -d -p 8080:8080 forethought
-  - docker ps -a  
+- openssl aes-256-cbc -K $encrypted_b295e0f06079_key -iv $encrypted_b295e0f06079_iv
+  -in gaekey.json.enc -out gaekey.json -d
+- bash docker-init.sh
+deploy:
+  provider: gae
+  keyfile: gaekey.json
+  project: deploying-to-257-7de18525 
+  on:
+    branch: main
